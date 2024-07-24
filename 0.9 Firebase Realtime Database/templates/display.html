@@ -1,15 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Display</title>
-  </head>
-  <body>
-    <h1>Display Page</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Display Quotes</title>
+</head>
+<body>
+    <h1>All Submitted Quotes</h1>
     <ul>
-        {% for quote in quotes %}
-            <li>{{ quote }}</li>
+        {% for key, quote in quotes.items() %}
+            <li>{{ quote['text'] }} - {{ quote['said_by'] }}</li>
         {% endfor %}
     </ul>
-  </body>
+    <a href="/home">Submit a new quote</a>
+    <a href="/signout">Sign Out</a>
+</body>
 </html>

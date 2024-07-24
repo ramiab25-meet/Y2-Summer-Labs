@@ -12,31 +12,44 @@ firebaseConfig = {
     "storageBucket": "first-lap-in-the-second-week.appspot.com",
     "messagingSenderId": "243459541669",
     "appId": "1:243459541669:web:0b1c9a1b8fc6fbb8c15b4c",
-    "measurementId": "G-K1R0365HDY",
-    "databaseURL": ""
+    "measurementId":"G-K1R0365HDY",
+    "databaseURL": "https://first-lap-in-the-second-week.firebaseio.com"
 }
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
+db = firebase.database()
 
 @app.route("/home", methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        quote = request.form["quote"]
-        if 'quotes' not in login_session:
-            login_session['quotes'] = []
-        login_session['quotes'].append(quote)
+        quote_text = request.form["quote"]
+        said_by = request.form["said_by"]
+        quote = {
+            "text": quote_text,
+            "said_by": said_by,
+            "uid": login_session['user']['localId']
+        }
+        db.child("Quotes").push(quote)
         return redirect(url_for('thanks'))
-    return render_template("home.html", quotes=login_session.get('quotes', []))
+    return render_template("home.html")
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        full_name = request.form['full_name']
+        username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         try:
             user = auth.create_user_with_email_and_password(email, password)
             login_session['user'] = user
+            user_data = {
+                "full_name": full_name,
+                "email": email,
+                "username": username
+            }
+            db.child("Users").child(user['localId']).set(user_data)
             return redirect(url_for('home'))
         except:
             error = "Signup failed. Please try again."
@@ -59,7 +72,8 @@ def signin():
 
 @app.route("/display")
 def display():
-    return render_template("display.html", quotes=login_session.get('quotes', []))
+    quotes = db.child("Quotes").get().val()
+    return render_template("display.html", quotes=quotes)
 
 @app.route("/thanks")
 def thanks():

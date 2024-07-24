@@ -1,0 +1,116 @@
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: pop-up 0.5s ease-in-out;
+}
+
+@keyframes pop-up {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #00aaff;
+}
+
+a {
+    color: #00aaff;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+a:hover, a:focus {
+    color: #ffffff;
+    background-color: #007acc;
+    text-decoration: none;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #00aaff;
+    border-radius: 5px;
+    background-color: #333333;
+    color: #e0e0e0;
+}
+
+button {
+    background-color: #00aaff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, button:focus {
+    background-color: #007acc;
+}
+
+.navbar {
+    background-color: #1e1e1e;
+    padding: 10px;
+}
+
+.navbar a {
+    color: #00aaff;
+    padding: 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.navbar a:hover, .navbar a:focus {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1e1e1e;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.taskbar a {
+    color: #00aaff;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.taskbar a:hover, .taskbar a:focus {
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5px;
+}
